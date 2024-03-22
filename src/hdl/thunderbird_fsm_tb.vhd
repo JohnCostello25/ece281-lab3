@@ -106,39 +106,39 @@ begin
 	
 	   w_reset <= '1';
        wait for k_clk_period*1;
-           assert w_light_L = "000" report "bad reset" severity failure;
-           assert w_light_R = "000" report "bad reset" severity failure;
+           assert w_lights_L = "000" report "bad reset" severity failure;
+           assert w_lights_R = "000" report "bad reset" severity failure;
        
        w_reset <= '0';
        wait for k_clk_period*1;
        
        w_right <= '1'; wait for k_clk_period;
-            assert w_light_R = "100" report "bad initial right" severity failure;
+            assert w_lights_R = "001" report "bad initial right" severity error;
        wait for k_clk_period;
-            assert w_light_R = "110" report "bad middle right" severity failure;
+            assert w_lights_R = "011" report "bad middle right" severity failure;
        wait for k_clk_period;
-            assert w_light_R = "111" report "bad final right" severity failure;
+            assert w_lights_R = "111" report "bad final right" severity failure;
        wait for k_clk_period;
-            assert w_light_R = "000" report "bad right loop" severity failure;
+            assert w_lights_R = "000" report "bad right loop" severity failure;
             
        w_right <= '0'; w_left <= '1'; wait for k_clk_period;
-            assert w_light_L = "100" report "bad initial left" severity failure;
+            assert w_lights_L = "001" report "bad initial left" severity failure;
        wait for k_clk_period;
-            assert w_light_L = "110" report "bad middle left" severity failure;
+            assert w_lights_L = "011" report "bad middle left" severity failure;
        wait for k_clk_period;
-            assert w_light_L = "111" report "bad final left" severity failure;
+            assert w_lights_L = "111" report "bad final left" severity failure;
        wait for k_clk_period;
-            assert w_light_L = "000" report "bad left loop" severity failure;
+            assert w_lights_L = "000" report "bad left loop" severity failure;
             
        w_right <= '1'; wait for k_clk_period;
-            assert w_light_R = "111" report "bad initial blinker" severity failure;
-            assert w_light_L = "111" report "bad initial blinker" severity failure;
+            assert w_lights_R = "111" report "bad initial blinker" severity failure;
+            assert w_lights_L = "111" report "bad initial blinker" severity failure;
        wait for k_clk_period;
-            assert w_light_R = "000" report "bad blinker change" severity failure;
-            assert w_light_L = "000" report "bad blinker change" severity failure;
+            assert w_lights_R = "000" report "bad blinker change" severity failure;
+            assert w_lights_L = "000" report "bad blinker change" severity failure;
        wait for k_clk_period;
-            assert w_light_R = "111" report "bad blinker change back" severity failure;
-            assert w_light_L = "111" report "bad blinker change back" severity failure;
+            assert w_lights_R = "111" report "bad blinker change back" severity failure;
+            assert w_lights_L = "111" report "bad blinker change back" severity failure;
 	
 	           wait;
 	   end process;
